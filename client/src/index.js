@@ -7,7 +7,6 @@ import { createStore, applyMiddleware } from "redux";
 
 import reduxThunk from "redux-thunk";
 import reducers from "./reducers";
-//WTF
 
 // Styles
 // Import Flag Icons Set
