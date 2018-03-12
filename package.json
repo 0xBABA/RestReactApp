@@ -1,0 +1,31 @@
+{
+  "name": "REST-API-Server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "engines": {
+    "node": "8.6.0",
+    "npm": "5.3.0"
+  },
+  "scripts": {
+    "dev": "concurrently  \" nodemon server/server.js\" \"cd client && npm run start\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brian Ridsdale - http://github.com/dynamikarray",
+  "license": "MIT",
+  "dependencies": {
+    "convict": "^3.0.0",
+    "dotenv": "^5.0.1",
+    "express": "^4.15.3",
+    "jsonwebtoken": "^7.4.1",
+    "morgan": "^1.9.0",
+    "mustache-express": "^1.2.4",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-google-oauth": "^1.0.0",
+    "passport-jwt": "^2.2.1",
+    "passport-youtube-v3": "^2.1.0"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1"
+  }
+}
