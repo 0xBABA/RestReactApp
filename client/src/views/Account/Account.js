@@ -1,16 +1,32 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import { connect } from "react-redux";
+import * as actions from "../../actions/index";
+
+import UserCard from "../../components/UserCard";
+
 class Account extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    return <div>Account</div>;
+    if (this.props.user) {
+      return (
+        <div className="animated fadeIn">
+          <UserCard user={this.props.user} />
+        </div>
+      );
+    }
+    return <div>You must be logged in to continue!</div>;
   }
 }
 
 Account.propTypes = {};
 
-export default Account;
+function mapStateToProps({ user }) {
+  return { user };
+}
+
+export default connect(mapStateToProps, actions)(Account);

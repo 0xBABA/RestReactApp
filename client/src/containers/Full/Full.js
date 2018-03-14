@@ -10,18 +10,32 @@ import Footer from "../../components/Footer/";
 
 import Dashboard from "../../views/Dashboard/";
 import Account from "../../views/Account/";
+import Login from "../../views/Login/";
 
 import * as actions from "../../actions/index";
 
 import { connectedRouterRedirect } from "redux-auth-wrapper/history4/redirect";
 const userIsAuthenticated = connectedRouterRedirect({
-  //if login fail go here
-  redirectPath: "/signup",
+  redirectPath: "/login",
   authenticatedSelector: (state, ownProps) =>
     state.user !== false && state.user !== null,
   authenticatingSelector: state => state.isLoading,
-  //nice dispaly name
   wrapperDisplayName: "UserIsAuthenticated"
+});
+
+//  AUTH "NON" route check sounds back to query param or "homepage <-maybe dashboard"
+import locationHelperBuilder from "redux-auth-wrapper/history4/locationHelper";
+const locationHelper = locationHelperBuilder({});
+const userIsNotAuthenticated = connectedRouterRedirect({
+  //user is actually logged in so, if they have redirect send there else go to account
+  redirectPath: (state, ownProps) => {
+    return locationHelper.getRedirectQueryParam(ownProps) || "/account";
+  },
+  authenticatedSelector: (state, ownProps) =>
+    state.user == false || state.user == null,
+  //prevent addingg query param when sending user away from rsource page
+  allowRedirectBack: false,
+  wrapperDisplayName: "UserIsNotAuthenticated"
 });
 
 import createHistory from "history/createBrowserHistory";
@@ -31,16 +45,6 @@ const history = createHistory();
 class Full extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      isLoading: false
-    };
-
-    this.updateLoading = this.updateLoading.bind(this);
-  }
-
-  updateLoading(state) {
-    this.setState({ isLoading: state });
   }
 
   componentWillMount() {
@@ -48,16 +52,13 @@ class Full extends Component {
 
     //if not a user in states
     if (!this.props.user && localJWT) {
-      this.updateLoading(true);
       this.props.readUser(() => {
         this.props.history.push("/account");
-        this.updateLoading(false);
       });
     }
   }
 
   isAuthed() {
-    //console.log("is auth", this.props.user);
     if (!this.props.user) {
       return false;
     }
@@ -74,6 +75,11 @@ class Full extends Component {
             <Breadcrumb />
             <Container fluid>
               <Switch>
+                <Route
+                  path="/login"
+                  name="Login"
+                  component={userIsNotAuthenticated(Login)}
+                />
                 <Route
                   path="/account"
                   name="Account"
