@@ -26,7 +26,7 @@ function generateUserToken(req, res, next) {
 
 module.exports = app => {
   app.get(
-    "/api/authentication/google/start",
+    "/api/auth/youtube/start",
     passport.authenticate("youtube", {
       scope: [
         "https://www.googleapis.com/auth/youtube.readonly",
@@ -41,7 +41,7 @@ module.exports = app => {
   );
 
   app.get(
-    "/api/authentication/google/redirect",
+    "/api/auth/youtube/redirect",
     passport.authenticate("youtube", { session: false }),
     generateUserToken
   );

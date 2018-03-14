@@ -21,7 +21,7 @@ class Login extends Component {
               <p>Please Login using your Youtube Account to begin.</p>
               <h6>
                 <a
-                  href="/api/authentication/google/start"
+                  href="/api/auth/youtube/start"
                   className="btn btn-danger btn-lg"
                 >
                   <i className="fa fa-youtube mr-1" />Login

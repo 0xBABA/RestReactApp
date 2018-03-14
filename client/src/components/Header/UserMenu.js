@@ -103,7 +103,7 @@ class UserMenu extends Component {
     return (
       <NavItem className="px-3">
         <NavLink
-          href="/api/authentication/google/start"
+          href="/api/auth/youtube/start"
           title="Sign in using Youtube"
         >
           <span>
