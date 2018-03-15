@@ -9,6 +9,18 @@ app.use(passport.initialize());
 const morgan = require("morgan");
 app.use(morgan("combined"));
 
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+const mongoose = require("mongoose");
+mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGODB_URI);
+
+//Add user schema
+require("./models/User");
+//const User = mongoose.model("User");
+
 //auth routes
 require("./routes/api/authentication.js")(app);
 //user routes

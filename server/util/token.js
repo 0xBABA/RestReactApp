@@ -11,7 +11,7 @@ function generateAccessToken(userId) {
     expiresIn: expiresIn,
     audience: audience,
     issuer: issuer,
-    subject: userId.toString()
+    subject: userId
   });
 
   return token;
