@@ -1,6 +1,6 @@
 const passport = require("passport");
 const passportJwt = require("passport-jwt");
-const users = require("../util/users");
+const User = require("../../models/User");
 
 const jwtOptions = {
   jwtFromRequest: passportJwt.ExtractJwt.fromAuthHeader(),
@@ -10,8 +10,8 @@ const jwtOptions = {
 };
 
 passport.use(
-  new passportJwt.Strategy(jwtOptions, (payload, done) => {
-    const user = users.getUserById(parseInt(payload.sub));
+  new passportJwt.Strategy(jwtOptions, async (payload, done) => {
+    const user = await User.getUserById(payload.sub);
     if (user) {
       return done(null, user, payload);
     }

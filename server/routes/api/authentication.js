@@ -1,7 +1,7 @@
 const passport = require("passport");
 
 //require("../../authentication/google");
-require("../../authentication/youtube");
+require("../../middleware/authentication/youtube");
 const token = require("../../util/token");
 
 // Generate the Token for the user authenticated in the request

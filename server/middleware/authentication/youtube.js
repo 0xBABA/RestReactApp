@@ -1,7 +1,6 @@
 const passport = require("passport");
-//var refresh = require("passport-oauth2-refresh");
 const YoutubeV3Strategy = require("passport-youtube-v3").Strategy;
-const users = require("../util/users");
+const User = require("../../models/User");
 
 var strategy = new YoutubeV3Strategy(
   {
@@ -10,9 +9,9 @@ var strategy = new YoutubeV3Strategy(
     callbackURL: process.env.GOOGLE_CALLBACK_URL
   },
   async (accessToken, refreshToken, profile, done) => {
-    let user = users.getUserByExternalId("youtube", profile.id);
+    let user = await User.getUserByExternalId("youtube", profile.id);
     if (!user) {
-      user = users.createUser(profile, "youtube", profile.id);
+      user = await User.createUser(profile, "youtube", profile.id);
     }
     return done(null, user);
   }

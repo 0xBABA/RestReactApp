@@ -5,6 +5,7 @@
 Configure Social Accounts in the `.env` file.
 
 ```
+MONGODB_URI
 NODE_ENV=development
 
 GOOGLE_CLIENT_ID=getFromYourGoogleDevConsole
