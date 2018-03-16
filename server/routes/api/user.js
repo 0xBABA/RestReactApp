@@ -1,6 +1,7 @@
 const passport = require("passport");
 require("../../middleware/authentication/jwt");
 
+const userValidator = require("../../middleware/validators/api/user");
 const User = require("../../models/User");
 
 module.exports = app => {
@@ -19,10 +20,13 @@ module.exports = app => {
   app.put(
     "/api/user/account",
     passport.authenticate(["jwt"], { session: false }),
+    userValidator.checkUserResourceBody,
+    userValidator.buildUserResourceFields,
     async (req, res) => {
-      // update this users info
-      const user = await User.updateByUserId(req.user.id, req.body);
+      const user = await User.updateByUserId(req.user.id, req.resourceFields);
       res.json({ result: user });
     }
   );
+
+  //DELETE - delete user handled ???
 };
