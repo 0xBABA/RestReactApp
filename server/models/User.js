@@ -24,6 +24,7 @@ async function createUser(profile, provider, id) {
   const profileData = profile._json.items[0];
   const avatar = profileData.snippet.thumbnails.default.url;
   const name = profile.displayName;
+  const email = "";
 
   return (user = await new User({
     name,
