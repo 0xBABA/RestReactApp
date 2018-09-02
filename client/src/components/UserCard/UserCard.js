@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import UserDetailsForm from "./UserDetailsForm";
+
 import { Card } from "reactstrap";
 
 class UserCard extends Component {
@@ -31,21 +33,28 @@ class UserCard extends Component {
 
   render() {
     return (
-      <Card>
-        <div className="d-flex justify-content-start flex-wrap">
-          <div className="mr-2 align-self-center ">{this.renderAvatar()}</div>
-          <div className="ml-2 mr-auto align-self-center ">
-            {this.renderUsername()}
-            {this.renderEmail()}
+      <div className="">
+        <Card>
+          <div className="d-flex justify-content-start flex-wrap">
+            <div className="mr-2 align-self-center ">{this.renderAvatar()}</div>
+            <div className="ml-2 mr-auto align-self-center ">
+              {this.renderUsername()}
+            </div>
           </div>
-        </div>
-      </Card>
+        </Card>
+
+        <UserDetailsForm
+          user={this.props.user}
+          updateUser={this.props.updateUser}
+        />
+      </div>
     );
   }
 }
 
 UserCard.propTypes = {
-  user: PropTypes.oneOfType([PropTypes.bool, PropTypes.object])
+  user: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  updateUser: PropTypes.func
 };
 
 export default UserCard;

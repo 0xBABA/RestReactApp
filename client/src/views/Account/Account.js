@@ -15,7 +15,7 @@ class Account extends Component {
     if (this.props.user) {
       return (
         <div className="animated fadeIn">
-          <UserCard user={this.props.user} />
+          <UserCard user={this.props.user} updateUser={this.props.updateUser} />
         </div>
       );
     }
@@ -29,4 +29,7 @@ function mapStateToProps({ user }) {
   return { user };
 }
 
-export default connect(mapStateToProps, actions)(Account);
+export default connect(
+  mapStateToProps,
+  actions
+)(Account);

@@ -10,7 +10,7 @@ class UserCardMini extends Component {
     if (this.props.user) {
       return (
         <img
-          style={{ maxHeight: "40px" }}
+          style={{ maxHeight: "80px" }}
           src={this.props.user.avatar}
           className="img img-avatar --center-block mt-2"
         />

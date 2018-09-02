@@ -39,7 +39,7 @@ class Header extends Component {
         </NavbarToggler>
 
         <Nav className="ml-auto" navbar>
-          <NavItem className="d-md-down-none">
+          <NavItem className="">
             <UserMenu />
           </NavItem>
         </Nav>

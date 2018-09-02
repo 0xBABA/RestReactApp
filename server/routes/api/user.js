@@ -23,7 +23,12 @@ module.exports = app => {
     userValidator.checkUserResourceBody,
     userValidator.buildUserResourceFields,
     async (req, res) => {
-      const user = await User.updateByUserId(req.user.id, req.resourceFields);
+      const user = await User.updateByUserId(
+        req.user.id,
+        req.resourceFields
+      ).catch(err => {
+        console.log(err);
+      });
       res.json({ result: user });
     }
   );

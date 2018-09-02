@@ -16,7 +16,27 @@ export const readUser = onComplete => async dispatch => {
     onComplete();
   } catch (error) {
     onComplete();
-    //Catches unresolved promise form the 403 unauthorized,
+    //Catches unresolved promise from the 403 unauthorized,
+  }
+};
+
+export const updateUser = values => async dispatch => {
+  try {
+    const res = await axios.put(
+      `/api/user/account`,
+      { ...values },
+      {
+        headers: { Authorization: "JWT " + localStorage.getItem("jwt") }
+      }
+    );
+
+    if (!res.data.error && res.data.result) {
+      dispatch({ type: READ_USER, payload: res.data.result });
+    } else if (res.data.error && !res.data.result) {
+      dispatch({ type: READ_USER, payload: res.data.error });
+    }
+  } catch (error) {
+    //// TODO: HANDLE THIS with SENTRY?
   }
 };
 
